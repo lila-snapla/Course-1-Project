@@ -1,0 +1,104 @@
+﻿<Window x:Class="Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:a="{}http://schemas.microsoft.com/winfx/2006/xaml/presentation}RibbonHelper"
+        xmlns:local="clr-namespace:Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1500" Background="#FFE7FFE7">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Frame Name="nextPage" NavigationUIVisibility="Hidden" Grid.Column="1"/>
+
+        <TreeView Grid.Column="0" FontSize="20" Foreground="DarkGreen" FontFamily="Cascadia Code" 
+   Background="#FFAEDFAC" x:Name="Категории" SelectedItemChanged="Категории_SelectedItemChanged"
+                  >
+            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+                <TextBlock Text="Имунная система"/>
+
+                <TreeViewItem Binding.XmlNamespaceManager="{Binding item}">
+                    <TextBlock Text="Основные понятия"/>
+
+                    <TreeViewItem Binding.XmlNamespaceManager="{Binding item}">
+                        <TextBlock Text="Лейкоциты"/>
+
+                        <TreeViewItem>
+                            <TextBlock Text="Т-Лимфоциты" Tag="3" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed"/>
+                            <TextBlock Text="Б-Лимфоциты" Tag="4" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed"/>
+                            <TextBlock Text="Нейтрофилы"  Tag="5" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed"/>
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+                <TextBlock Text="Антигены" Tag="1" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Binding.XmlNamespaceManager="{Binding item}"/>
+            </TreeViewItem>
+            <TreeViewItem IsExpanded="True" >
+                <TextBlock Text="Антитела" Tag="2" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Binding.XmlNamespaceManager="{Binding item}"/>
+            </TreeViewItem>
+            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+                <TextBlock Text="Вирусы"/>
+
+                <TreeViewItem Binding.XmlNamespaceManager="{Binding item}">
+                    <TextBlock Text="Гепатиты"/>
+
+                    <TreeViewItem>
+                        <TextBlock Tag="7" Text="Гепатит A" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Гепатит B" Tag="8" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Гепатит C" Tag="9" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Гепатит D" Tag="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+                <TextBlock Text="Бактерии"/>
+            </TreeViewItem>
+            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+                <TextBlock Text="Способы лечения"/>
+            </TreeViewItem>
+            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+                <TextBlock Text="Заболевания"/>
+
+                <TreeViewItem>
+                    <TextBlock Text="Вирусные инфекции" Binding.XmlNamespaceManager="{Binding item}"/>
+
+                    <TreeViewItem>
+                        <TextBlock Text="ВИЧ" Tag="12" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Вирус ветряной оспы"  Tag="13" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Вирус бешенства" Tag="14" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Вирус гриппа" Tag="15" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                    </TreeViewItem>
+                </TreeViewItem>
+
+                <TreeViewItem Binding.XmlNamespaceManager="{Binding item}">
+                    <TextBlock Text="Бактериальные инфекции"/>
+
+                    <TreeViewItem>
+                        <TextBlock Text="Дифтерия" Tag="16" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Столбняк" Tag="17" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Рожа" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Трахома" Tag="19" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Text="Вибриоз" Tag="20" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeViewItem>
+
+            <TreeView.ContextMenu>
+                <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" Name="menu"
+                             Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                    <MenuItem Header="Добавить ветвь" Name="AddTreeItem" Click="AddTreeItem_Click"/>
+                    <MenuItem Header="Удалить ветвь" Name="RemoveTreeItem" Click="RemoveTreeItem_Click"/>
+                    <MenuItem Header="Переименовать ветвь" Name="renameTree" Click="renameTree_Click"/>
+                    <MenuItem Header="Добавить статью" Name="AddPrint" Click="AddPrint_Click"/>
+                    <MenuItem Header="Удалить статью" Name="RemovePrint" Click="RemovePrint_Click"/>
+                    <MenuItem Header="Переслать статью по Email" Name="EmailPrint" Click="EmailPrint_Click"/>
+                </ContextMenu>
+            </TreeView.ContextMenu>
+        </TreeView>
+    </Grid>
+</Window>

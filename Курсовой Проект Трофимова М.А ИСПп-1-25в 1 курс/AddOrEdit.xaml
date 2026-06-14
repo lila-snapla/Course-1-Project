@@ -1,0 +1,21 @@
+﻿<Window x:Class="Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс.AddOrEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс"
+        mc:Ignorable="d"
+        Title="AddOrEdit" Height="340" Width="400" Background="LightGreen">
+    <StackPanel>
+        <TextBlock Text="Введите значения" FontSize="25" FontFamily="Cascadia Code" HorizontalAlignment="Center" Margin="0,20"/>
+        <TextBlock FontSize="20" FontFamily="Cascadia Code" Width="370" Margin="0, 20, 0, 0">
+     <TextBox Background="#FFE7FFE7" BorderBrush="DarkGreen" x:Name="logName" Width="300"/>
+        </TextBlock>
+        <TextBlock FontSize="20" FontFamily="Cascadia Code" Width="370" Margin="0,20">
+            <TextBox BorderBrush="DarkGreen" Background="#FFE7FFE7" x:Name="mainTree" Width="300"/>  <Button Content="..." BorderBrush="DarkGreen" Name="show" Width="40" Click="show_Click" Background="DarkGreen" Foreground="#FFE7FFE7"/>
+        </TextBlock>
+        <Button Content="Добавить статью" BorderBrush="DarkGreen" Name="AddPageBttn" Width="200" FontSize="20" Click="AddPageBttn_Click"  Background="DarkGreen" Foreground="#FFE7FFE7" Margin="0,0,170,10"/>
+        <Button Content="Редактировать" BorderBrush="DarkGreen" Name="EditBttn" Width="200" FontSize="20" Click="EditBttn_Click"  Background="DarkGreen" Foreground="#FFE7FFE7" Margin="0,0,170,10"/>
+        <Button Content="Добавить ветвь" BorderBrush="DarkGreen" Name="AddTreeBttn" Width="200" FontSize="20" Click="AddTreeBttn_Click"  Background="DarkGreen" Foreground="#FFE7FFE7" Margin="0,0,170,0"/>
+    </StackPanel>
+</Window>

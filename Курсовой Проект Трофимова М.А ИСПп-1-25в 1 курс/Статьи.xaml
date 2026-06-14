@@ -1,0 +1,86 @@
+﻿<Page x:Class="Курсовая_работа_1_семестр.Статьи"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Курсовая_работа_1_семестр"
+      xmlns:local2="clr-namespace:Курсовая_работа_1_семестр.для_работы_с_файлами"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1300"
+      Title="Статьи">
+
+    <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ToolBar Background="#FFA5DCA5" Grid.Row="0" MinWidth="800" Width="1350">
+                <Button x:Name="lock" Height="30" Click="lock_Click" Background="DarkGreen">
+                    <Image Source="C:\Users\MSI\Desktop\основная система папок\Хранение\Фотки всякие разные\i.webp"/>
+                </Button>
+                <Button x:Name="Open" Height="30" Click="Open_Click" IsEnabled="False">
+                    <Image Source="C:\Users\MSI\Desktop\основная система папок\Все, что касается айти\Курсовая Работа Трофимова М.А ИСПп-1-25в\Примеры элементов\Text-Editor-WPF-master\Text-Editor-WPF-master\TextEditor\3.png"/>
+                </Button>
+                <Separator/>
+                <Button x:Name="Safe" Height="30" Click="Safe_Click" IsEnabled="False">
+                    <Image Source="C:\Users\MSI\Desktop\основная система папок\Все, что касается айти\Курсовая Работа Трофимова М.А ИСПп-1-25в\Примеры элементов\Text-Editor-WPF-master\Text-Editor-WPF-master\TextEditor\7.png"/>
+                </Button>
+                <Separator/>
+                <Button x:Name="Print" Height="30" Click="Print_Click" IsEnabled="False">
+                    <Image Source="C:\Users\MSI\Desktop\основная система папок\Все, что касается айти\Курсовая Работа Трофимова М.А ИСПп-1-25в\Примеры элементов\Text-Editor-WPF-master\Text-Editor-WPF-master\TextEditor\14.png"/>
+                </Button>
+                <Separator/>
+                <ToggleButton IsEnabled="False" x:Name="bold" Command="EditingCommands.ToggleBold" 
+                              FontWeight="Bold" FontSize="20" Width="30" 
+                              Foreground="DarkGreen">Ж</ToggleButton>
+                <Separator/>
+                <ToggleButton x:Name="Itallian" Command="EditingCommands.ToggleItalic" Width="30" 
+                              FontStyle="Italic" FontSize="20" 
+                              Foreground="DarkGreen">К</ToggleButton>
+                <Separator/>
+                <ToggleButton IsEnabled="False" x:Name="UnderLine" Command="EditingCommands.ToggleUnderline"
+                              Width="30" FontSize="20"
+                              Foreground="DarkGreen">
+                    <ToggleButton.Content>
+                        <TextBlock Text="Ч" TextDecorations="Underline"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <Separator/>
+                <ComboBox IsEnabled="False" Background="#FFE7FFE7" IsEditable="False" x:Name="ChangeFont" FontSize="15" Width="150" SelectionChanged="ChangeFont_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontFamily="{Binding}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Separator/>
+                <ComboBox IsEnabled="False" Background="#FFE7FFE7" IsEditable="False" x:Name="ChangeColor" FontSize="15" Width="150" SelectionChanged="ChangeColor_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="DarkGreen"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Separator/>
+                <ComboBox IsEnabled="False" x:Name="ChangeSize" IsEditable="True" TextBoxBase.TextChanged="ChangeSize_TextChanged"
+                          Background="#FFE7FFE7" FontSize="15" Width="50">
+
+                </ComboBox>
+                <Separator/>
+            </ToolBar>
+
+            <RichTextBox Grid.Row="1" MinWidth="790" Width="1350" Background="#FFE7FFE7" 
+             Name="Texting" SelectionChanged="Texting_SelectionChanged" Foreground="DarkGreen"
+                         IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                         HorizontalScrollBarVisibility="Auto">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+        </Grid>
+    </DockPanel>
+</Page>

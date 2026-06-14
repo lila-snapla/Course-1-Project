@@ -1,0 +1,9 @@
+﻿<Application x:Class="Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
