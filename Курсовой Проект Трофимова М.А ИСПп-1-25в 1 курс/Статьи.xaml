@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
 
             <ToolBar Background="#FFA5DCA5" Grid.Row="0" MinWidth="800" Width="1350">
-                <Button x:Name="lock" Height="30" Click="lock_Click" Background="DarkGreen">
+                <Button x:Name="lock" Height="30" Click="lock_Click"  Background="DarkGreen">
                     <Image Source="C:\Users\MSI\Desktop\основная система папок\Хранение\Фотки всякие разные\i.webp"/>
                 </Button>
                 <Button x:Name="Open" Height="30" Click="Open_Click" IsEnabled="False">
@@ -71,10 +71,10 @@
                 <Separator/>
             </ToolBar>
 
-            <RichTextBox Grid.Row="1" MinWidth="790" Width="1350" Background="#FFE7FFE7" 
+            <RichTextBox Grid.Row="1" MinWidth="790" Width="auto" Background="#FFE7FFE7" 
              Name="Texting" SelectionChanged="Texting_SelectionChanged" Foreground="DarkGreen"
                          IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
-                         HorizontalScrollBarVisibility="Auto">
+                         HorizontalScrollBarVisibility="Auto" PreviewMouseWheel="Texting_PreviewMouseWheel">
                 <RichTextBox.Resources>
                     <Style TargetType="{x:Type Paragraph}">
                         <Setter Property="Margin" Value="5"/>

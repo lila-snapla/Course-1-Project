@@ -22,16 +22,17 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
         public AddOrEdit()
         {
             InitializeComponent();
+            
         }
         public AddOrEdit(string name) : this()
         {
-
+            if (!string.IsNullOrEmpty(Name)) logName.Text = Name; Name = name;
         }
         public AddOrEdit(string name, string fullPath) : this()
         {
-
+            if (!string.IsNullOrEmpty(Name)) { logName.Text = Name; mainTree.Text = FullPath; Name = name; FullPath = fullPath; }
         }
-        public string fullPath { get; set; }
+        public string FullPath { get; set; }
         public string Name { get; set; }
         private void show_Click(object sender, RoutedEventArgs e)
         {
@@ -47,12 +48,11 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
                         string path = System.IO.Path.GetDirectoryName(ofd.FileName);
                         string name = System.IO.Path.GetFileName(ofd.FileName);
 
-                        fullPath = path + name;
+                        FullPath = path + name;
                         Name = name;
 
-                        mainTree.Text = fullPath;
+                        mainTree.Text = FullPath;
                         logName.Text = name;
-                        var window = new MainWindow(fullPath, Name);
                     }
                 }
             }
@@ -63,24 +63,33 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void AddPageBttn_Click(object sender, RoutedEventArgs e)
+        private async void AddPageBttn_Click(object sender, RoutedEventArgs e)
         {
-            App.repository.AddDocument(Name, fullPath);
-            var window = new MainWindow(fullPath, Name);
+            Name = logName.Text.Trim();
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(FullPath)) { MessageBox.Show("Выберите имя и путь"); return; }
+            await App.repository.AddDocument(Name, FullPath);
+            var window = new MainWindow(FullPath, Name);
+
+            DialogResult = true;
             this.Close();
         }
 
-        private void EditBttn_Click(object sender, RoutedEventArgs e)
+        private async void EditBttn_Click(object sender, RoutedEventArgs e)
         {
+            Name = logName.Text.Trim();
+            if (string.IsNullOrEmpty(Name)) { MessageBox.Show("Выберите имя"); return; }
             int id = Convert.ToInt32(App.repository.FindDocument(App.doc.LogsId));
-            App.repository.EditDocument(id, Name, fullPath);
+            await App.repository.EditDocument(id, Name, FullPath);
             var window = new MainWindow(Name);
+            DialogResult = true;
             this.Close();
         }
 
         private void AddTreeBttn_Click(object sender, RoutedEventArgs e)
         {
-            var window = new MainWindow(fullPath, Name);
+            Name = logName.Text.Trim();
+            if (string.IsNullOrEmpty(Name)) { MessageBox.Show("Выберите имя"); return; }
+            DialogResult = true;
             this.Close();
         }
     }

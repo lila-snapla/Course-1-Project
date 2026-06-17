@@ -20,6 +20,7 @@ using System.Xml;
 using Курсовая_работа_1_семестр.для_работы_с_файлами;
 using Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс;
 using Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс.SQL;
+using VisioForge.Core;
 
 namespace Курсовая_работа_1_семестр
 {
@@ -28,25 +29,8 @@ namespace Курсовая_работа_1_семестр
     /// </summary>
     public partial class Статьи : Page
     {
-        /* 
-         
-        надо немного доработать:
-
-        1.добавить возможность писать с правого края и с центра
-        2.Добавить возможность добавлять и убирать отступы перед абзацами и после
-        3.реализовать режим чтения
-        4.сделать дизайн более автономным от той проги на гитхабе, которую ты нагло спиздила
-
-        что нужно доработать в интерфейсе боковой панели:
-
-        1.сделать адекватные размеры окна и адекватную возможность их менять(сделать так, чтобы окно могло открыться во все окно вплоть до панели задач)
-        2.добавить иконки перед статьями и разделами
-        3.сделать ползунок чуть медленнее
-        4.грамотно разделить для восприятия статьи и разделы
-        5.контекстное меню должно вписываться в общую стилистику интерфейса(так просто красивее)
-         
-         */
         private string _localFilePath;
+        private int countClick = 0;
         
         public Статьи(string filePath)
         { 
@@ -202,14 +186,60 @@ namespace Курсовая_работа_1_семестр
                 Texting.Focus();
             }
         }
+        private ScrollViewer FindScrollViewer(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is ScrollViewer viewer) return viewer;
+
+                var result = FindScrollViewer(child);
+                if (result != null) return result;
+            }
+            return null;
+        }
+        private void Texting_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scrollviewer = FindScrollViewer(Texting);
+            if (scrollviewer != null)
+            {
+                int slowerDelta = e.Delta / 3;
+                scrollviewer.ScrollToVerticalOffset(scrollviewer.VerticalOffset - slowerDelta);
+                e.Handled = true;
+            }
+        }
 
         private void lock_Click(object sender, RoutedEventArgs e)
         {
-            Open.IsEnabled = true; 
-            Safe.IsEnabled = true;
-            ChangeColor.IsEnabled = true;
-            ChangeFont.IsEnabled = true;
-            ChangeSize.IsEnabled = true;
+            Texting.IsReadOnly = !Texting.IsReadOnly;
+            if (Texting.IsReadOnly)
+            {
+                Open.IsEnabled = false;
+                Safe.IsEnabled = false;
+
+                ChangeColor.IsEnabled = false;
+                ChangeColor.Background = Brushes.White;
+                ChangeColor.Foreground = Brushes.LightGray;
+
+                ChangeFont.IsEnabled = false;
+                ChangeFont.Background = Brushes.White;
+                ChangeSize.Foreground = Brushes.LightGray;
+
+                ChangeSize.IsEnabled = false;
+                ChangeSize.Background = Brushes.White;
+                ChangeSize.Foreground = Brushes.LightGray;
+
+                Texting.IsReadOnly = true;
+            }
+            else
+            { 
+                Open.IsEnabled = true;
+                Safe.IsEnabled = true;
+                ChangeColor.IsEnabled = true;
+                ChangeFont.IsEnabled = true;
+                ChangeSize.IsEnabled = true;
+                Texting.IsReadOnly = false;
+            }
         }
     }
 }

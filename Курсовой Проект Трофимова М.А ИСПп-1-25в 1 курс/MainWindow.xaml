@@ -17,73 +17,76 @@
 
         <TreeView Grid.Column="0" FontSize="20" Foreground="DarkGreen" FontFamily="Cascadia Code" 
    Background="#FFAEDFAC" x:Name="Категории" SelectedItemChanged="Категории_SelectedItemChanged"
-                  >
-            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+    >
+
+
+            <TreeViewItem IsExpanded="True">
                 <TextBlock Text="Имунная система"/>
 
-                <TreeViewItem Binding.XmlNamespaceManager="{Binding item}">
+                <TreeViewItem>
                     <TextBlock Text="Основные понятия"/>
 
-                    <TreeViewItem Binding.XmlNamespaceManager="{Binding item}">
+                    <TreeViewItem>
                         <TextBlock Text="Лейкоциты"/>
 
                         <TreeViewItem>
-                            <TextBlock Text="Т-Лимфоциты" Tag="3" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed"/>
-                            <TextBlock Text="Б-Лимфоциты" Tag="4" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed"/>
-                            <TextBlock Text="Нейтрофилы"  Tag="5" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed"/>
+                            <TextBlock Tag="4" Text="Т-Лимфоциты" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                            <TextBlock Tag="3" Text="Б-Лимфоциты" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                            <TextBlock Tag="6" Text="Нейтрофилы" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                            <TextBlock Tag="5" Text="Базофилы" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
                         </TreeViewItem>
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
-                <TextBlock Text="Антигены" Tag="1" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Binding.XmlNamespaceManager="{Binding item}"/>
+            <TreeViewItem IsExpanded="True">
+                <TextBlock Text="Антигены" Tag="2" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" >
-                <TextBlock Text="Антитела" Tag="2" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Binding.XmlNamespaceManager="{Binding item}"/>
+            <TreeViewItem IsExpanded="True" Tag="1">
+                <TextBlock Text="Антитела" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+            <TreeViewItem IsExpanded="True">
                 <TextBlock Text="Вирусы"/>
 
-                <TreeViewItem Binding.XmlNamespaceManager="{Binding item}">
+                <TreeViewItem>
                     <TextBlock Text="Гепатиты"/>
 
                     <TreeViewItem>
-                        <TextBlock Tag="7" Text="Гепатит A" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Гепатит B" Tag="8" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Гепатит C" Tag="9" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Гепатит D" Tag="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Tag="7" Text="Гепатит A" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="8" Text="Гепатит B" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="9" Text="Гепатит C" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="10" Text="Гепатит D" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="11" Text="Гепатит E" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+            <TreeViewItem IsExpanded="True">
                 <TextBlock Text="Бактерии"/>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+            <TreeViewItem IsExpanded="True">
                 <TextBlock Text="Способы лечения"/>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" Binding.XmlNamespaceManager="{Binding item}">
+            <TreeViewItem IsExpanded="True">
                 <TextBlock Text="Заболевания"/>
 
                 <TreeViewItem>
-                    <TextBlock Text="Вирусные инфекции" Binding.XmlNamespaceManager="{Binding item}"/>
+                    <TextBlock Text="Вирусные"/>
 
                     <TreeViewItem>
-                        <TextBlock Text="ВИЧ" Tag="12" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Вирус ветряной оспы"  Tag="13" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Вирус бешенства" Tag="14" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Вирус гриппа" Tag="15" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Tag="12" Text="ВИЧ" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="13" Text="Вирус ветряной оспы" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="14" Text="Вирус бешенства" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="15" Text="Вирус гриппа" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
                     </TreeViewItem>
                 </TreeViewItem>
 
-                <TreeViewItem Binding.XmlNamespaceManager="{Binding item}">
-                    <TextBlock Text="Бактериальные инфекции"/>
-
+                <TreeViewItem>
+                    <TextBlock Text="Бактериальные"/>
                     <TreeViewItem>
-                        <TextBlock Text="Дифтерия" Tag="16" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Столбняк" Tag="17" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Рожа" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Трахома" Tag="19" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
-                        <TextBlock Text="Вибриоз" Tag="20" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkRed" Cursor="Hand"/>
+                        <TextBlock Tag="16" Text="Дифтерия" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="17" Text="Столбняк" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="18" Text="Рожа" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="19" Text="Трахома" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                        <TextBlock Tag="20" Text="Вибриоз" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeViewItem>

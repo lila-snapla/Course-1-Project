@@ -11,21 +11,8 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
 {
     public class Repository
     {
-        public static WorkDbContext db = new();
-        public static DocumentsLog doc = new();
-        public async Task<List<DocumentsLog>> GetDocumentPaged(int page, int pageSize)
-        {
-            return await db.DocumentsLogs.OrderBy(d => d.LogsId)
-                     .Skip((page - 1) * pageSize)
-                     .Take(pageSize)
-                     .Select(s => new DocumentsLog()
-                     {
-                         LogsId = s.LogsId,
-                         MainTree = s.MainTree,
-                         LogsName = s.LogsName
-                     })
-                     .ToListAsync();
-        }
+        public WorkDbContext db = new();
+        private readonly string _baseDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Статьи");
         public async Task<DocumentsLog> FindDocument(int Id)
         {
             return await db.DocumentsLogs.Where(d => d.LogsId == Id)
@@ -72,6 +59,40 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
             doc.HasChanged = true;
 
             return await db.SaveChangesAsync() > 0;
+        }
+        public string GetDirectory(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return null;
+
+            if (Path.IsPathRooted(path))
+            {
+                return File.Exists(path) ? path : null;
+            }
+
+            if (!Directory.Exists(_baseDirectory))
+            {
+                MessageBox.Show($"Базовая папка не существует: {_baseDirectory}");
+                return null;
+            }
+
+            string fullPath = Path.Combine(_baseDirectory, path);
+            if (File.Exists(fullPath))
+                return fullPath;
+
+            string fileName = Path.GetFileName(path);
+            try
+            {
+                var foundFiles = Directory.GetFiles(_baseDirectory, fileName, SearchOption.AllDirectories);
+                if (foundFiles.Length > 0)
+                    return foundFiles[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка поиска: {ex.Message}");
+            }
+
+            MessageBox.Show($"Файл не найден:\nИскали: {path}\nВ папке: {_baseDirectory}");
+            return null;
         }
     }
 }
