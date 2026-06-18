@@ -43,7 +43,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                     <TreeViewItem Header="Лейкоциты">
-                        <TreeViewItem Header="Т-Лимфоциты" Tag="4" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem Header="Т-Лимфоциты" Tag="4" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -56,7 +56,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                         </TreeViewItem>
-                        <TreeViewItem Header="Б-Лимфоциты" Tag="3" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem Header="Б-Лимфоциты" Tag="3" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -69,7 +69,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                         </TreeViewItem>
-                        <TreeViewItem Header="Базофилы" Tag="5" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem Header="Базофилы" Tag="5" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -82,7 +82,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                         </TreeViewItem>
-                        <TreeViewItem Header="Нейтрофилы" Tag="6" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem Header="Нейтрофилы" Tag="6" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -98,7 +98,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" Header="Антигены" Tag="2" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+            <TreeViewItem IsExpanded="True" Header="Антигены" Tag="2" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -111,7 +111,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                     </ContextMenu>
                 </TreeViewItem.ContextMenu>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" Tag="1" Header="Антитела" Foreground="DarkBlue" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown">
+            <TreeViewItem IsExpanded="True" Tag="1" Header="Антитела" Foreground="DarkGreen" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown">
                 <TreeViewItem.ContextMenu>
                     <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -138,7 +138,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
-                    <TreeViewItem Header="Гепатит А" Tag="7" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Гепатит А" Tag="7" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -151,7 +151,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Гепатит B" Tag="8" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Гепатит B" Tag="8" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -164,7 +164,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Гепатит С" Tag="9" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Гепатит С" Tag="9" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -177,7 +177,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Гепатит D" Tag="10" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Гепатит D" Tag="10" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -190,7 +190,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Гепатит E" Tag="11" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Гепатит E" Tag="11" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -255,7 +255,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
-                    <TreeViewItem Header="ВИЧ" Tag="12" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="ВИЧ" Tag="12" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -268,7 +268,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Ветряная оспа" Tag="13" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Ветряная оспа" Tag="13" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -294,7 +294,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Вирус гриппа" Tag="15" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Вирус гриппа" Tag="15" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -321,7 +321,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
-                    <TreeViewItem Header="Дифтерия" Tag="16" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Дифтерия" Tag="16" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -334,7 +334,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Столбняк" Tag="17" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Столбняк" Tag="17" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -347,7 +347,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Рожа" Tag="18" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Рожа" Tag="18" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -360,7 +360,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                    <TreeViewItem Header="Трахома" Tag="19" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Трахома" Tag="19" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
@@ -373,7 +373,7 @@ Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                <TreeViewItem Header="Вибриоз" Tag="20" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                    <TreeViewItem Header="Вибриоз" Tag="20" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkGreen">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
 Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">

@@ -72,45 +72,6 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
             FilePath = filePath;
             LogName = logName;
         }
-        private async void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is not TextBlock text) return;
-
-            string rawTag = text.Tag?.ToString() ?? "";
-            string cleanTag = new string(rawTag.Where(char.IsDigit).ToArray());
-
-            if (string.IsNullOrEmpty(cleanTag) || !int.TryParse(cleanTag, out int key))
-            {
-                MessageBox.Show($"Не удалось распарсить тег: '{rawTag}' (чистый: '{cleanTag}')");
-                return;
-            }
-
-            try
-            {
-                var selectedDoc = await App.repository.FindDocument(key);
-
-                if (selectedDoc == null)
-                {
-                    MessageBox.Show("Документ не найден");
-                    return;
-                }
-                string fullPath = _app.GetPath(selectedDoc.MainTree);
-                if (!string.IsNullOrEmpty(fullPath) && File.Exists(fullPath))
-                {
-                    Статьи page = new(fullPath);
-                    nextPage.Navigate(page);
-
-                    App.doc = selectedDoc;
-                    SelectedDocument = selectedDoc;
-                }
-                else
-                    MessageBox.Show($"Файл не найден по пути: {selectedDoc.MainTree}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}");
-            }
-        }
         private async Task LoadCategories()
         {
             try
@@ -250,7 +211,7 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
                 Tag = newId,
                 IsExpanded = true,
                 ContextMenu = winMenu,
-                Foreground = Brushes.DarkBlue
+                Foreground = Brushes.DarkGreen
             };
 
             parentItem.Items.Add(newItem);
@@ -387,46 +348,6 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
             else
             {
                 Категории.Items.Add(newItem);
-            }
-        }
-        
-        private void Категории_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-
-        }
-
-        private async void TreeViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-            var item = sender as TreeViewItem;
-            if (item == null) return;
-
-            if (!(item.Tag is int id)) return;
-
-            try
-            {
-                var doc = await App.repository.FindDocument(id);
-                if (doc == null)
-                {
-                    MessageBox.Show($"Статья не найдена");
-                    return;
-                }
-
-                string fullPath = _app.GetPath(doc.MainTree);
-                if (string.IsNullOrEmpty(fullPath) || !File.Exists(fullPath))
-                {
-                    MessageBox.Show($"Файл не найден: {doc.MainTree}");
-                    return;
-                }
-
-                var page = new Статьи(fullPath);
-                nextPage.Navigate(page);
-
-                App.doc = doc;
-                SelectedDocument = doc;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
 
