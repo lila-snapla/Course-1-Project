@@ -14,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using VisioForge.Core.ONVIFX.Analytics;
 using Курсовая_работа_1_семестр;
 using Курсовая_работа_1_семестр.для_работы_с_файлами;
 using Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс;
@@ -198,8 +199,53 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
             string NewFullPath = window.FullPath;
             if (string.IsNullOrEmpty(NewName) || string.IsNullOrEmpty(NewFullPath)) { MessageBox.Show("Пожалуйста, заполните поля"); return; }
             bool added = await App.repository.AddDocument(NewName, NewFullPath);
-            
-            if (added) await LoadCategories();
+
+            TreeViewItem parentMenu = null;
+
+            if (!added) { MessageBox.Show("Не удалось добавить статью"); return; }
+
+            if (sender is MenuItem menuItem)
+            {
+                var contextMenu = menuItem.Parent as ContextMenu;
+                if (contextMenu != null)
+                {
+                    parentMenu = contextMenu.PlacementTarget as TreeViewItem;
+                    if (parentMenu == null)
+                    {
+                        DependencyObject current = contextMenu.PlacementTarget as DependencyObject;
+                        while (current != null && !(current is TreeViewItem))
+                        {
+                            current = VisualTreeHelper.GetParent(current);
+                        }
+                        parentMenu = current as TreeViewItem;
+
+                        Статьи page = new(NewFullPath);
+                        nextPage.Navigate(page);
+                    }
+                }
+            }
+
+            var newItem = new TreeViewItem
+            {
+                Header = NewName,
+                Tag = NewFullPath,
+                IsExpanded = true
+            };
+
+            if (parentMenu != null)
+            {
+                parentMenu.Items.Add(newItem);
+                parentMenu.IsExpanded = true;
+                Статьи page = new(NewFullPath);
+                nextPage.Navigate(page);
+            }
+            else
+            {
+                Категории.Items.Add(newItem);
+                Статьи page = new(NewFullPath);
+                nextPage.Navigate(page);
+            }
+            await LoadCategories();
         }
 
         private async void RemovePrint_Click(object sender, RoutedEventArgs e)
@@ -250,26 +296,47 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
         private async void AddTreeItem_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddOrEdit();
-            var menuItem = sender as MenuItem;
-            var contextMenu = menuItem?.Parent as ContextMenu;
-            var parentMenu = contextMenu?.PlacementTarget as TreeViewItem;
-
             window.ShowDialog();
 
             if (window.DialogResult != true) return;
 
             string newCategoryName = window.Name;
             if (string.IsNullOrEmpty(newCategoryName)) { MessageBox.Show("Выберите название ветки"); return; }
+            TreeViewItem parentMenu = null;
 
+            if (sender is MenuItem menuItem)
+            {
+                var contextMenu = menuItem.Parent as ContextMenu;
+                if (contextMenu != null)
+                {
+                    parentMenu = contextMenu.PlacementTarget as TreeViewItem;
+
+                    if (parentMenu == null)
+                    {
+                        DependencyObject current = contextMenu.PlacementTarget as DependencyObject;
+                        while (current != null && !(current is TreeViewItem))
+                        {
+                            current = VisualTreeHelper.GetParent(current);
+                        }
+                        parentMenu = current as TreeViewItem;
+                    }
+                }
+            }
             var newItem = new TreeViewItem
             {
                 Header = newCategoryName,
                 IsExpanded = true
             };
 
-            parentMenu.Items.Add(newItem);
-            parentMenu.IsExpanded = true;
-
+            if (parentMenu != null)
+            {
+                parentMenu.Items.Add(newItem);
+                parentMenu.IsExpanded = true;
+            }
+            else
+            {
+                Категории.Items.Add(newItem);
+            }
             await LoadCategories();
         }
         
