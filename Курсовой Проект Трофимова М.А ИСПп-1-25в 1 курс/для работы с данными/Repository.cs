@@ -34,7 +34,7 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
             db.DocumentsLogs.Remove(entity);
             return await db.SaveChangesAsync() > 0;
         }
-        public async Task<bool> AddDocument(string logsName, string mainTree)
+        public async Task<int> AddDocument(string logsName, string mainTree)
         {
             var entity = new DocumentsLog
             {
@@ -44,8 +44,11 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
                 CreatedAtTime = TimeOnly.FromDateTime(DateTime.Now),
                 HasChanged = false
             };
+
             await db.DocumentsLogs.AddAsync(entity);
-            return await db.SaveChangesAsync() > 0;
+            await db.SaveChangesAsync();
+
+            return entity.LogsId; 
         }
         public async Task<bool> EditDocument(int Id, string logsName, string mainTree)
         {

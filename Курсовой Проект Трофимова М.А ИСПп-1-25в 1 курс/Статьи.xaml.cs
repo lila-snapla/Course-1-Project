@@ -82,31 +82,46 @@ namespace Курсовая_работа_1_семестр
 
         private async void Safe_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Delay(0);
             try
             {
                 SaveFileDialog sfd = new();
                 sfd.Filter = "RTF документ (*.rtf)|*.rtf";
+                sfd.FileName = System.IO.Path.GetFileName(_localFilePath);
 
-                TextRange doc = new(Texting.Document.ContentStart, Texting.Document.ContentEnd);
                 if (sfd.ShowDialog() == true)
                 {
-                    using (FileStream fs = File.Create(sfd.FileName))
+                    var range = new TextRange(Texting.Document.ContentStart, Texting.Document.ContentEnd);
+                    using (FileStream fs = new FileStream(sfd.FileName, FileMode.Create))
                     {
-                        if (System.IO.Path.GetExtension(sfd.FileName).ToLower() == ".rtf")
-                            doc.Save(fs, DataFormats.Rtf);
+                        range.Save(fs, DataFormats.Rtf);
                     }
 
-                    int findId = Convert.ToInt32(App.repository.FindDocument(App.doc.LogsId));
-                    App.repository.EditDocument(findId, sfd.FileName, System.IO.Path.GetDirectoryName(sfd.FileName));
+                    if (App.doc != null)
+                    {
+                        bool updated = await App.repository.EditDocument(
+                            App.doc.LogsId,
+                            App.doc.LogsName,
+                            sfd.FileName
+                        );
+
+                        if (updated)
+                        {
+                            App.doc.MainTree = sfd.FileName;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Файл сохранён, но путь в БД не обновлён");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Файл сохранён, но не привязан к статье");
+                    }
                 }
-                
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show($"Расширение не поддерживается данным приложением \n " +
-                    $"Код ошибки: {ex.Message}", "Не удалось сохранить документ",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка сохранения: {ex.Message}");
             }
         }
 
@@ -219,15 +234,12 @@ namespace Курсовая_работа_1_семестр
 
                 ChangeColor.IsEnabled = false;
                 ChangeColor.Background = Brushes.White;
-                ChangeColor.Foreground = Brushes.LightGray;
 
                 ChangeFont.IsEnabled = false;
                 ChangeFont.Background = Brushes.White;
-                ChangeSize.Foreground = Brushes.LightGray;
 
                 ChangeSize.IsEnabled = false;
                 ChangeSize.Background = Brushes.White;
-                ChangeSize.Foreground = Brushes.LightGray;
 
                 Texting.IsReadOnly = true;
             }

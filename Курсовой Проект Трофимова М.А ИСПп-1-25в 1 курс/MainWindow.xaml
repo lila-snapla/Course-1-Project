@@ -6,7 +6,18 @@
         xmlns:a="{}http://schemas.microsoft.com/winfx/2006/xaml/presentation}RibbonHelper"
         xmlns:local="clr-namespace:Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в_1_курс"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1500" Background="#FFE7FFE7">
+        Title="Словарь имунология и вирусология" Height="600" Width="1500" Background="#FFE7FFE7">
+    <Window.Resources>
+        <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code" x:Key="menu">
+            <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+            <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+            <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+            <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+            <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+            <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+        </ContextMenu>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
@@ -18,90 +29,365 @@
         <TreeView Grid.Column="0" FontSize="20" Foreground="DarkGreen" FontFamily="Cascadia Code" 
    Background="#FFAEDFAC" x:Name="Категории" SelectedItemChanged="Категории_SelectedItemChanged"
     >
-
-
             <TreeViewItem IsExpanded="True">
-                <TextBlock Text="Имунная система"/>
-
-                <TreeViewItem>
-                    <TextBlock Text="Основные понятия"/>
-
-                    <TreeViewItem>
-                        <TextBlock Text="Лейкоциты"/>
-
-                        <TreeViewItem>
-                            <TextBlock Tag="4" Text="Т-Лимфоциты" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                            <TextBlock Tag="3" Text="Б-Лимфоциты" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                            <TextBlock Tag="6" Text="Нейтрофилы" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                            <TextBlock Tag="5" Text="Базофилы" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                <TreeViewItem Header="Основные понятия">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2"
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                            <MenuItem Header="Добавить ветвь" Name="AddTreeItem" Click="AddTreeItem_Click"/>
+                            <MenuItem Header="Удалить ветвь" Name="RemoveTreeItem" Click="RemoveTreeItem_Click"/>
+                            <MenuItem Header="Переименовать ветвь" Name="renameTree" Click="renameTree_Click"/>
+                            <MenuItem Header="Добавить статью" Name="AddPrint" Click="AddPrint_Click"/>
+                            <MenuItem Header="Удалить статью" Name="RemovePrint" Click="RemovePrint_Click"/>
+                            <MenuItem Header="Переслать статью по Email" Name="EmailPrint" Click="EmailPrint_Click"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                    <TreeViewItem Header="Лейкоциты">
+                        <TreeViewItem Header="Т-Лимфоциты" Tag="4" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                    <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                    <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                    <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                    <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                    <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                    <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Б-Лимфоциты" Tag="3" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                    <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                    <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                    <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                    <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                    <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                    <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Базофилы" Tag="5" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                    <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                    <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                    <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                    <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                    <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                    <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Нейтрофилы" Tag="6" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                    <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                    <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                    <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                    <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                    <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                    <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
                         </TreeViewItem>
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True">
-                <TextBlock Text="Антигены" Tag="2" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+            <TreeViewItem IsExpanded="True" Header="Антигены" Tag="2" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                        <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                        <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                        <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                        <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                        <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                        <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True" Tag="1">
-                <TextBlock Text="Антитела" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+            <TreeViewItem IsExpanded="True" Tag="1" Header="Антитела" Foreground="DarkBlue" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown">
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                        <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                        <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                        <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                        <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                        <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                        <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True">
-                <TextBlock Text="Вирусы"/>
+            <TreeViewItem IsExpanded="True" Header="Вирусы">
 
-                <TreeViewItem>
-                    <TextBlock Text="Гепатиты"/>
-
-                    <TreeViewItem>
-                        <TextBlock Tag="7" Text="Гепатит A" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="8" Text="Гепатит B" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="9" Text="Гепатит C" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="10" Text="Гепатит D" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="11" Text="Гепатит E" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                <TreeViewItem Header="Гепатиты">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                            <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                            <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                            <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                            <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                            <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                            <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                    <TreeViewItem Header="Гепатит А" Tag="7" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Гепатит B" Tag="8" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Гепатит С" Tag="9" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Гепатит D" Tag="10" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Гепатит E" Tag="11" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True">
-                <TextBlock Text="Бактерии"/>
+            <TreeViewItem IsExpanded="True" Header="Бактерии">
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                        <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                        <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                        <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                        <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                        <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                        <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True">
-                <TextBlock Text="Способы лечения"/>
+            <TreeViewItem IsExpanded="True" Header="Способы лечения">
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                        <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                        <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                        <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                        <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                        <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                        <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
             </TreeViewItem>
-            <TreeViewItem IsExpanded="True">
-                <TextBlock Text="Заболевания"/>
-
-                <TreeViewItem>
-                    <TextBlock Text="Вирусные"/>
-
-                    <TreeViewItem>
-                        <TextBlock Tag="12" Text="ВИЧ" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="13" Text="Вирус ветряной оспы" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="14" Text="Вирус бешенства" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="15" Text="Вирус гриппа" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+            <TreeViewItem IsExpanded="True" Header="Заболевания">
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                        <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                        <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                        <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                        <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                        <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                        <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+                <TreeViewItem Header="Вирусные">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                            <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                            <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                            <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                            <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                            <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                            <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                    <TreeViewItem Header="ВИЧ" Tag="12" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Ветряная оспа" Tag="13" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Вирус бешенства" Tag="14" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Вирус гриппа" Tag="15" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
                     </TreeViewItem>
                 </TreeViewItem>
 
-                <TreeViewItem>
-                    <TextBlock Text="Бактериальные"/>
-                    <TreeViewItem>
-                        <TextBlock Tag="16" Text="Дифтерия" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="17" Text="Столбняк" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="18" Text="Рожа" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="19" Text="Трахома" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
-                        <TextBlock Tag="20" Text="Вибриоз" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="DarkBlue"/>
+                <TreeViewItem Header="Бактериальные">
+                    <TreeViewItem.ContextMenu>
+                        <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                            <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                            <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                            <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                            <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                            <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                            <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                        </ContextMenu>
+                    </TreeViewItem.ContextMenu>
+                    <TreeViewItem Header="Дифтерия" Tag="16" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
                     </TreeViewItem>
-                </TreeViewItem>
+                    <TreeViewItem Header="Столбняк" Tag="17" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Рожа" Tag="18" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Трахома" Tag="19" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+                <TreeViewItem Header="Вибриоз" Tag="20" PreviewMouseLeftButtonDown="TreeViewItem_PreviewMouseLeftButtonDown" Foreground="DarkBlue">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" 
+Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
+                                <MenuItem Header="Добавить ветвь" Click="AddTreeItem_Click"/>
+                                <MenuItem Header="Удалить ветвь" Click="RemoveTreeItem_Click"/>
+                                <MenuItem Header="Переименовать ветвь" Click="renameTree_Click"/>
+                                <MenuItem Header="Добавить статью" Click="AddPrint_Click"/>
+                                <MenuItem Header="Удалить статью" Click="RemovePrint_Click"/>
+                                <MenuItem Header="Переслать статью по Email" Click="EmailPrint_Click"/>
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+              </TreeViewItem>
             </TreeViewItem>
-
-            <TreeView.ContextMenu>
-                <ContextMenu Height="200" Width="350" Background="#FFE7FFE7" BorderBrush="DarkGreen" BorderThickness="2" Name="menu"
-                             Grid.Column="0" FontSize="20" FontFamily="Cascadia Code">
-                    <MenuItem Header="Добавить ветвь" Name="AddTreeItem" Click="AddTreeItem_Click"/>
-                    <MenuItem Header="Удалить ветвь" Name="RemoveTreeItem" Click="RemoveTreeItem_Click"/>
-                    <MenuItem Header="Переименовать ветвь" Name="renameTree" Click="renameTree_Click"/>
-                    <MenuItem Header="Добавить статью" Name="AddPrint" Click="AddPrint_Click"/>
-                    <MenuItem Header="Удалить статью" Name="RemovePrint" Click="RemovePrint_Click"/>
-                    <MenuItem Header="Переслать статью по Email" Name="EmailPrint" Click="EmailPrint_Click"/>
-                </ContextMenu>
-            </TreeView.ContextMenu>
         </TreeView>
     </Grid>
 </Window>

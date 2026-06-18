@@ -32,6 +32,12 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
         {
             if (!string.IsNullOrEmpty(Name)) { logName.Text = Name; mainTree.Text = FullPath; Name = name; FullPath = fullPath; }
         }
+        public AddOrEdit(string name, bool isRenameOnly = false)
+        {
+            InitializeComponent();
+            logName.Text = name;
+            mainTree.Visibility = isRenameOnly ? Visibility.Collapsed : Visibility.Visible;
+        }
         public string FullPath { get; set; }
         public string Name { get; set; }
         private void show_Click(object sender, RoutedEventArgs e)
@@ -43,24 +49,19 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
 
                 if (ofd.ShowDialog() == true)
                 {
-                    using (FileStream fs = new FileStream(ofd.FileName, FileMode.Open))
-                    {
-                        string path = System.IO.Path.GetDirectoryName(ofd.FileName);
-                        string name = System.IO.Path.GetFileName(ofd.FileName);
+                    string fullPath = ofd.FileName; 
+                    string name = System.IO.Path.GetFileName(fullPath);
 
-                        FullPath = path + name;
-                        Name = name;
+                    FullPath = fullPath;
+                    Name = name;
 
-                        mainTree.Text = FullPath;
-                        logName.Text = name;
-                    }
+                    mainTree.Text = fullPath;
+                    logName.Text = name;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Расширение не поддерживается данным приложением \n " +
-                    $"Код ошибки: {ex.Message}", "Не удалось открыть документ",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
         private async void AddPageBttn_Click(object sender, RoutedEventArgs e)
@@ -77,12 +78,15 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
         private async void EditBttn_Click(object sender, RoutedEventArgs e)
         {
             Name = logName.Text.Trim();
-            if (string.IsNullOrEmpty(Name)) { MessageBox.Show("Выберите имя"); return; }
-            int id = Convert.ToInt32(App.repository.FindDocument(App.doc.LogsId));
-            await App.repository.EditDocument(id, Name, FullPath);
-            var window = new MainWindow(Name);
+
+            if (string.IsNullOrEmpty(Name))
+            {
+                MessageBox.Show("Введите название");
+                return;
+            }
+
             DialogResult = true;
-            this.Close();
+            Close();
         }
 
         private void AddTreeBttn_Click(object sender, RoutedEventArgs e)

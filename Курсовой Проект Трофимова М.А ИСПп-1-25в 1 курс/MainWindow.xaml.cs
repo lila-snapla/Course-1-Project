@@ -131,13 +131,15 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
                     item.Items.Clear();
 
                     var filtered = docs.Where(d => d.LogsId == id);
+                    var winMenu = (ContextMenu)Resources["menu"];
 
                     foreach (var doc in filtered)
                     {
                         var docItem = new TreeViewItem()
                         {
                             Header = doc.LogsName,
-                            Tag = doc.LogsId
+                            Tag = doc.LogsId,
+                            ContextMenu = winMenu
                         };
                         item.Items.Add(docItem);
                     }
@@ -181,85 +183,139 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
         }
         private async void renameTree_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedDocument == null) { MessageBox.Show("Вы не выбрали статью"); return; }
-            var window = new AddOrEdit(SelectedDocument.LogsName);
-            window.ShowDialog();
-            string NewName = window.Name;
-            if (string.IsNullOrEmpty(NewName)) { MessageBox.Show("Выберите название"); return; }
+            var selectedItem = Категории.SelectedItem as TreeViewItem;
+            if (selectedItem == null)
+            {
+                MessageBox.Show("Выберите ветку");
+                return;
+            }
 
-            bool edited = await App.repository.EditDocument(SelectedDocument.LogsId, NewName, SelectedDocument.MainTree);
-            if (edited) await LoadCategories();
+            var window = new AddOrEdit(selectedItem.Header?.ToString());
+            window.ShowDialog();
+
+            if (window.DialogResult != true) { MessageBox.Show("Не удалось переименовать ветку");  return; }
+
+            string newName = window.Name;
+            if (string.IsNullOrEmpty(newName))
+            {
+                MessageBox.Show("Введите название");
+                return;
+            }
+
+            selectedItem.Header = newName;
         }
 
         private async void AddPrint_Click(object sender, RoutedEventArgs e)
         {
+            var menuItem = sender as MenuItem;
+            var contextMenu = menuItem?.Parent as ContextMenu;
+            var parentItem = contextMenu?.PlacementTarget as TreeViewItem;
+
+            if (parentItem == null)
+            {
+                parentItem = Категории.SelectedItem as TreeViewItem;
+            }
+
+            if (parentItem == null)
+            {
+                MessageBox.Show("Выберите ветку для добавления статьи");
+                return;
+            }
+
             var window = new AddOrEdit();
             window.ShowDialog();
-            string NewName = window.Name;
-            string NewFullPath = window.FullPath;
-            if (string.IsNullOrEmpty(NewName) || string.IsNullOrEmpty(NewFullPath)) { MessageBox.Show("Пожалуйста, заполните поля"); return; }
-            bool added = await App.repository.AddDocument(NewName, NewFullPath);
 
-            TreeViewItem parentMenu = null;
+            if (window.DialogResult != true) return;
 
-            if (!added) { MessageBox.Show("Не удалось добавить статью"); return; }
+            string newName = window.Name;
+            string newPath = window.FullPath;
 
-            if (sender is MenuItem menuItem)
+            if (string.IsNullOrEmpty(newName) || string.IsNullOrEmpty(newPath))
             {
-                var contextMenu = menuItem.Parent as ContextMenu;
-                if (contextMenu != null)
-                {
-                    parentMenu = contextMenu.PlacementTarget as TreeViewItem;
-                    if (parentMenu == null)
-                    {
-                        DependencyObject current = contextMenu.PlacementTarget as DependencyObject;
-                        while (current != null && !(current is TreeViewItem))
-                        {
-                            current = VisualTreeHelper.GetParent(current);
-                        }
-                        parentMenu = current as TreeViewItem;
-
-                        Статьи page = new(NewFullPath);
-                        nextPage.Navigate(page);
-                    }
-                }
+                MessageBox.Show("Заполните все поля");
+                return;
             }
 
+            int newId = Convert.ToInt32(await App.repository.AddDocument(newName, newPath));
+
+            if (newId == 0)
+            {
+                MessageBox.Show("Не удалось добавить статью в БД");
+                return;
+            }
+            var winMenu = (ContextMenu)Resources["menu"];
             var newItem = new TreeViewItem
             {
-                Header = NewName,
-                Tag = NewFullPath,
-                IsExpanded = true
+                Header = newName,
+                Tag = newId,
+                IsExpanded = true,
+                ContextMenu = winMenu,
+                Foreground = Brushes.DarkBlue
             };
 
-            if (parentMenu != null)
-            {
-                parentMenu.Items.Add(newItem);
-                parentMenu.IsExpanded = true;
-                Статьи page = new(NewFullPath);
-                nextPage.Navigate(page);
-            }
-            else
-            {
-                Категории.Items.Add(newItem);
-                Статьи page = new(NewFullPath);
-                nextPage.Navigate(page);
-            }
+            parentItem.Items.Add(newItem);
+            parentItem.IsExpanded = true;
+
             await LoadCategories();
+
+            var doc = await App.repository.FindDocument(newId);
+            if (doc != null)
+            {
+                string fullPath = _app.GetPath(doc.MainTree);
+                if (!string.IsNullOrEmpty(fullPath) && File.Exists(fullPath))
+                {
+                    var page = new Статьи(fullPath);
+                    nextPage.Navigate(page);
+                    App.doc = doc;
+                    SelectedDocument = doc;
+                }
+                else { MessageBox.Show($"Не удалось открыть статью по пути {fullPath}"); return; }
+            }
         }
 
         private async void RemovePrint_Click(object sender, RoutedEventArgs e)
         {
-            var selectedItem = await App.repository.FindDocument(App.doc.LogsId);
-            if (selectedItem == null) { MessageBox.Show("Вы не выбрали статью"); return; }
-            var confirm = MessageBox.Show($"Удалить статью '{SelectedDocument.LogsName}'?",
-                                        "Подтверждение",
-                                        MessageBoxButton.YesNo,
-                                        MessageBoxImage.Warning);
+            var menuItem = sender as MenuItem;
+            var contextMenu = menuItem?.Parent as ContextMenu;
+            var parentItem = contextMenu?.PlacementTarget as TreeViewItem;
+
+            if (parentItem == null)
+            {
+                parentItem = Категории.SelectedItem as TreeViewItem;
+            }
+
+            if (parentItem == null)
+            {
+                MessageBox.Show("Выберите статью для удаления");
+                return;
+            }
+
+            if (!(parentItem.Tag is int id))
+            {
+                MessageBox.Show("Не удалось определить ID статьи");
+                return;
+            }
+
+            var confirm = MessageBox.Show($"Удалить статью '{parentItem.Header}'?",
+                                          "Подтверждение",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Warning);
             if (confirm != MessageBoxResult.Yes) return;
-            bool deleted = await App.repository.DeleteDocument(App.doc.LogsId);
-            
-            if (deleted) { await LoadCategories(); SelectedDocument = null; }
+
+            bool deleted = await App.repository.DeleteDocument(id);
+            if (deleted)
+            {
+                var parent = GetParentTreeViewItem(parentItem);
+                if (parent != null)
+                    parent.Items.Remove(parentItem);
+                else
+                    Категории.Items.Remove(parentItem);
+            }
+            else
+            {
+                MessageBox.Show("Не удалось удалить статью");
+            }
+            await LoadCategories();
         }
 
         private void EmailPrint_Click(object sender, RoutedEventArgs e)
@@ -295,49 +351,43 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
 
         private async void AddTreeItem_Click(object sender, RoutedEventArgs e)
         {
+            var menuItem = sender as MenuItem;
+            var contextMenu = menuItem?.Parent as ContextMenu;
+            var parentItem = contextMenu?.PlacementTarget as TreeViewItem;
+
+            if (parentItem == null)
+            {
+                parentItem = Категории.SelectedItem as TreeViewItem;
+            }
+
             var window = new AddOrEdit();
             window.ShowDialog();
 
             if (window.DialogResult != true) return;
 
-            string newCategoryName = window.Name;
-            if (string.IsNullOrEmpty(newCategoryName)) { MessageBox.Show("Выберите название ветки"); return; }
-            TreeViewItem parentMenu = null;
-
-            if (sender is MenuItem menuItem)
+            string newName = window.Name;
+            if (string.IsNullOrEmpty(newName))
             {
-                var contextMenu = menuItem.Parent as ContextMenu;
-                if (contextMenu != null)
-                {
-                    parentMenu = contextMenu.PlacementTarget as TreeViewItem;
-
-                    if (parentMenu == null)
-                    {
-                        DependencyObject current = contextMenu.PlacementTarget as DependencyObject;
-                        while (current != null && !(current is TreeViewItem))
-                        {
-                            current = VisualTreeHelper.GetParent(current);
-                        }
-                        parentMenu = current as TreeViewItem;
-                    }
-                }
+                MessageBox.Show("Введите название");
+                return;
             }
+            var winMenu = (ContextMenu)Resources["menu"];
             var newItem = new TreeViewItem
             {
-                Header = newCategoryName,
-                IsExpanded = true
+                Header = newName,
+                IsExpanded = true,
+                ContextMenu = winMenu
             };
 
-            if (parentMenu != null)
+            if (parentItem != null)
             {
-                parentMenu.Items.Add(newItem);
-                parentMenu.IsExpanded = true;
+                parentItem.Items.Add(newItem);
+                parentItem.IsExpanded = true;
             }
             else
             {
                 Категории.Items.Add(newItem);
             }
-            await LoadCategories();
         }
         
         private void Категории_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -347,23 +397,85 @@ namespace Курсовой_Проект_Трофимова_М.А_ИСПп_1_25в
 
         private async void TreeViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            var item = e.OriginalSource as TreeViewItem;
-            if (item?.Tag is int Id)
-            {
-                var filtered = await App.repository.FindDocument(Id);
+            var item = sender as TreeViewItem;
+            if (item == null) return;
 
-                if (filtered != null)
+            if (!(item.Tag is int id)) return;
+
+            try
+            {
+                var doc = await App.repository.FindDocument(id);
+                if (doc == null)
                 {
-                    string fullPath = _app.GetPath(filtered.MainTree);
-                    if (!string.IsNullOrEmpty(fullPath) && File.Exists(fullPath))
-                    {
-                        var page = new Статьи(fullPath);
-                        nextPage.Navigate(page);
-                        App.doc = filtered;
-                        SelectedDocument = filtered;
-                    }
+                    MessageBox.Show($"Статья не найдена");
+                    return;
                 }
-                else MessageBox.Show($"Статья не найдена по пути {App.doc.MainTree}");
+
+                string fullPath = _app.GetPath(doc.MainTree);
+                if (string.IsNullOrEmpty(fullPath) || !File.Exists(fullPath))
+                {
+                    MessageBox.Show($"Файл не найден: {doc.MainTree}");
+                    return;
+                }
+
+                var page = new Статьи(fullPath);
+                nextPage.Navigate(page);
+
+                App.doc = doc;
+                SelectedDocument = doc;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
+        }
+
+        private async void TreeViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = sender as TreeViewItem;
+            if (item == null) return;
+            if (e.OriginalSource is System.Windows.Controls.Primitives.ToggleButton)
+                { MessageBox.Show("Это корневой элемент"); return;  }
+            if (item.Tag == null)
+            {
+                MessageBox.Show("Tag отсутствует");
+                return;
+            }
+
+            string rawTag = item.Tag.ToString();
+            string cleanTag = new string(rawTag.Where(char.IsDigit).ToArray());
+
+            if (!int.TryParse(cleanTag, out int id))
+            {
+                MessageBox.Show($"Не удалось распарсить Tag: '{rawTag}' (очищенный: '{cleanTag}')");
+                return;
+            }
+
+            try
+            {
+                var doc = await App.repository.FindDocument(id);
+                if (doc == null)
+                {
+                    MessageBox.Show($"Статья не найдена");
+                    return;
+                }
+
+                string fullPath = _app.GetPath(doc.MainTree);
+
+                if (string.IsNullOrEmpty(fullPath) || !File.Exists(fullPath))
+                {
+                    MessageBox.Show($"Файл не найден: {doc.MainTree}");
+                    return;
+                }
+
+                App.doc = doc;
+                SelectedDocument = doc;
+                var page = new Статьи(fullPath);
+                nextPage.Navigate(page);             
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
     }

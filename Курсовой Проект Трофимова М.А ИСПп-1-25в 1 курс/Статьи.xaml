@@ -16,7 +16,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ToolBar Background="#FFA5DCA5" Grid.Row="0" MinWidth="800" Width="1350">
+            <ToolBar Background="#FFA5DCA5" Grid.Row="0" Width="auto">
                 <Button x:Name="lock" Height="30" Click="lock_Click"  Background="DarkGreen">
                     <Image Source="C:\Users\MSI\Desktop\основная система папок\Хранение\Фотки всякие разные\i.webp"/>
                 </Button>
